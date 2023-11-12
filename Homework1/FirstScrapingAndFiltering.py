@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import csv
 
-# Replace 'YOUR_GOOGLE_API_KEY' with your actual Google Maps API key
+
 GOOGLE_API_KEY = 'AIzaSyAkjgnSLpQeQv28Oui8wAkjU9pnfi9e3Ks'
 
-# Descriptions for heritage sites
+
 descriptions = [
     "Skopje has been inhabited since at least 4200 BC, making it one of the oldest cities in Europe...",
     "The sacred architecture of Ohrid is prominent within the urban landscape. It includes early basilicas...",
@@ -21,7 +21,7 @@ descriptions = [
 def scrape_heritage_sites_list(url):
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Raise an HTTPError for bad responses
+        response.raise_for_status() 
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
         return None
@@ -30,8 +30,7 @@ def scrape_heritage_sites_list(url):
         html_content = response.text
         soup = BeautifulSoup(html_content, 'html.parser')
 
-        # Extract relevant information based on the HTML structure of the website
-        # Modify the following line based on the actual structure of the website
+        
         heritage_sites = [element.get_text().strip().replace('\n', ' ') for element in soup.find_all('h2')]
 
         return heritage_sites
@@ -42,7 +41,7 @@ def scrape_heritage_sites_list(url):
 
 
 def get_google_info(place_name, country="North Macedonia"):
-    # Use the Google Maps Geocoding API to geocode place name to get coordinates
+   
     formatted_place_name = f"{place_name}, {country}"
     google_api_url = f"https://maps.googleapis.com/maps/api/geocode/json?address={formatted_place_name}&key={GOOGLE_API_KEY}"
 
@@ -81,12 +80,11 @@ def filter_scrape_tripadvisor_data(data):
         html_content = response.text
         soup = BeautifulSoup(html_content, 'html.parser')
 
-        # Extract relevant information based on the HTML structure of the TripAdvisor website
-        # Modify the following line based on the actual structure of the website
+        
         tripadvisor_info = [element.get_text().strip().replace('\n', ' ') for element in
                             soup.find_all('h2', class_='something')]
 
-        # Add TripAdvisor info to the data
+        
         for site_data, tripadvisor_data in zip(data, tripadvisor_info):
             site_data['TripAdvisor Info'] = tripadvisor_data
 
@@ -128,16 +126,15 @@ if __name__ == "__main__":
                     'Coordinates': site_info.get('coordinates'),
                 })
 
-        # Step 3: Pipe and Filter
+       # Pipe and Filter
         my_pipe = Pipe()
         my_pipe.add(filter_add_descriptions, descriptions)
         my_pipe.add(filter_scrape_tripadvisor_data)
         data = my_pipe.execute(data)
 
-        # Step 4: Create a Row Table using Pandas
         df = pd.DataFrame(data)
 
-        # Step 5: Export to CSV
+        #  Export to CSV
         df.to_csv('heritage_sites_data.csv', index=False, quoting=csv.QUOTE_ALL)
 
         # Print the resulting table
