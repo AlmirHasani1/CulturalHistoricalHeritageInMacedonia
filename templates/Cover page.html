@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cover Page</title>
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Cover page styles */
+        .cover {
+            height: 100vh;
+            background: linear-gradient(to right, #000000, #313131);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+
+        h1, h2 {
+            font-family: 'Cardinal', Arial, sans-serif;
+            font-size: 100px;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .logo-container {
+            margin-top: 20px;
+            max-width: 200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="cover">
+    <div class="text">
+        <h1>Macedonian</h1>
+        <h2>Heritage</h2>
+    </div>
+    <div class="logo-container">
+        <a href="{{ url_for('intro') }}">
+            <img src="{{ url_for('static', filename='pnggg.png') }}" alt="Logo" class="logo">
+        </a>
+        <p class="redirect-text">Pay tribute to the soldier to unveil the page</p>
+    </div>
+</div>
+</body>
+</html>
