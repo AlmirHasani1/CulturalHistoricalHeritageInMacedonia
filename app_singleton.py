@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 import requests
 import csv
 from config import GOOGLE_API_KEY  # Importing the API key from the config file
@@ -69,4 +69,4 @@ def format_place_data(places_data):
     return formatted_data
 
 if __name__ == "__main__":
-    app_singleton.app.run(port=5002, debug=True)
+    app_singleton.app.run(debug=True)
