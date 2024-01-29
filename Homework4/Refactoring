@@ -1,0 +1,25 @@
+
+## Refactoring Update
+
+Refactoring Changes Using Singleton Pattern
+
+    Introduction:
+        Implemented the Singleton pattern to ensure that only one instance of the Flask application is created throughout the application's lifecycle.
+
+    Purpose:
+        Enhance resource management and improve efficiency by restricting the creation of multiple Flask application instances.
+
+    Changes:
+        Created a AppSingleton class to encapsulate the Flask application instance.
+        Implemented a class-level _instance attribute to store the singleton instance.
+        Utilized the __new__ method to control the instantiation process and ensure only one instance is created.
+        Updated the application routes to utilize the singleton instance for routing.
+
+    Impact:
+        Improved maintainability by centralizing the management of the Flask application instance.
+        Facilitated better resource utilization by preventing redundant instances.
+        Enhanced code readability by abstracting the instantiation logic into a separate class.
+
+    Conclusion:
+        Successfully refactored the codebase to adhere to the Singleton pattern, ensuring efficient resource management and better scalability.
+
